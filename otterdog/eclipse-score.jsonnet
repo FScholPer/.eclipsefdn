@@ -1402,8 +1402,11 @@ orgs.newOrg('automotive.score', 'eclipse-score') {
       ],
     },
 
-    newDependableElementRepo('inc_diagnostics', subcategory = "incubation") {
-      description: "Incubation repository for diagnostics feature",
+    newDependableElementRepo('diagnostics') {
+      aliases: [
+        "inc_diagnostics",
+      ],
+      description: "Repository for diagnostics feature",
     },
 
     newDependableElementRepo('inc_security_crypto') {
