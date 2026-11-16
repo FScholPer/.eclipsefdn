@@ -1403,8 +1403,30 @@ orgs.newOrg('automotive.score', 'eclipse-score') {
       ],
     },
 
-    newDependableElementRepo('inc_diagnostics', subcategory = "incubation") {
-      description: "Incubation repository for diagnostics feature",
+    newDependableElementRepo('diagnostics') {
+      aliases: [
+        "inc_diagnostics",
+      ],
+      description: "Repository for diagnostics feature",
+      rulesets: [
+        orgs.newRepoRuleset('main') {
+          include_refs+: [
+            "~DEFAULT_BRANCH"
+          ],
+          required_pull_request+: default_review_rule,
+          required_status_checks+: {
+            status_checks+: [
+              "On PR mergeable",
+              "Bazel Build (Linux) mergeable",
+              "Docs Build mergeable",
+              "License check mergeable",
+            ],
+          },
+          required_merge_queue: orgs.newMergeQueue() {
+            merge_method: "SQUASH",
+          },
+        },
+      ],
     },
 
     newDependableElementRepo('inc_security_crypto') {
